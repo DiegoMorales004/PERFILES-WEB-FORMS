@@ -11,7 +11,7 @@ using System.Data.SqlClient;
 
 namespace PERFILES.DataLayer
 {
-    internal class DepartmentDL
+    public class DepartmentDL
     {
 
         //Create department
@@ -137,7 +137,7 @@ namespace PERFILES.DataLayer
             }
         }
 
-        //Delete 
+        //Delete department
         public bool DeleteDeparment(int id)
         {
             using (SqlConnection localConnection = new SqlConnection(Connection.connection))
