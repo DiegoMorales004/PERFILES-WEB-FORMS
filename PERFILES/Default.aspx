@@ -2,6 +2,12 @@
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
 
+    <div>
+        <div>
+            <asp:Button runat="server" OnClick="New_Employee_Click" CssClass="btn btn-sm -btn-success" Text="Nuevo" />
+        </div>
+    </div>
+
     <div class="row">
         <div class="col-12">
             
