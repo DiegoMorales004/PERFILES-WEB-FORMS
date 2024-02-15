@@ -6,6 +6,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using System.Globalization;
+using Microsoft.SqlServer.Server;
+
 
 namespace PERFILES.BusinessLayer
 {
@@ -21,6 +24,8 @@ namespace PERFILES.BusinessLayer
             try
             {
                 CheckParametersEmployee(employee);
+
+                employee.Age = CalculateAge(employee.BirthDate);
 
                 return EmployeeDL.CreateEmployee(employee);
 
@@ -72,6 +77,8 @@ namespace PERFILES.BusinessLayer
                 Employee validEmployee = GetEmployee(employee.Id);
 
                 CheckParametersEmployee(employee);
+                
+                employee.Age = CalculateAge(employee.BirthDate);
 
                 return EmployeeDL.UpdateEmployee(employee);
 
@@ -118,6 +125,9 @@ namespace PERFILES.BusinessLayer
             if( CheckFormateDate( employee.Admission, out date ) ) 
                 throw new OperationCanceledException("Invalid format to birthdate");
 
+            if (employee.HomeAddress == "" || employee.HomeAddress == null)
+                throw new OperationCanceledException("The home address cannot be void.");
+
             if (employee.NIT.GetType() != typeof(System.Int32) || employee.NIT.ToString().Length > 9) 
                 throw new OperationCanceledException("The parameter NIT must have 9 numbers.");
 
@@ -145,6 +155,20 @@ namespace PERFILES.BusinessLayer
             {
                 return false;
             }
+        }
+
+        //Calculate age by birthDate
+        private int CalculateAge(string BirthDate)
+        {
+            DateTime today = DateTime.Today;
+
+            //Convert string BirthDate to type DateTime 
+            DateTime NewBirthDate = DateTime.ParseExact(BirthDate, "yyyy-MM-dd", CultureInfo.InvariantCulture);
+
+            int age = today.Year - NewBirthDate.Year;
+
+            return age;
+
         }
 
     }
