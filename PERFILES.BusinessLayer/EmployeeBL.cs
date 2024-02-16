@@ -60,7 +60,6 @@ namespace PERFILES.BusinessLayer
         {
             try
             {
-                
                 return EmployeeDL.EmployeesList();
 
             }catch(Exception ex) {

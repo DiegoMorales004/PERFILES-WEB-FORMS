@@ -28,7 +28,7 @@
                             
                             <asp:LinkButton 
                                 runat="server" 
-                                CommandArgument="<%# Eval("id") %>"
+                                CommandArgument='<%# Eval("id") %>'
                                 OnClick="Edit_Employee_Click"
                                 CssClass="btn btn-sm btn-primary"
                                 >
@@ -37,7 +37,7 @@
 
                             <asp:LinkButton 
                                 runat="server" 
-                                CommandArgument="<%# Eval("id") %>"
+                                CommandArgument='<%# Eval("id") %>'
                                 OnClick="Delete_Employee_Click"
                                 CssClass="btn btn-sm btn-danger"
                                 OnClientClick="return confirm('¿Desea eliminar el empleado?')"
