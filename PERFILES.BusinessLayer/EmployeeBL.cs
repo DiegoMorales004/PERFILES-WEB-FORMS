@@ -138,12 +138,6 @@ namespace PERFILES.BusinessLayer
             if( employee.Admission == null ) 
                 throw new OperationCanceledException("Invalid admission");
 
-            if (employee.HomeAddress == "" || employee.HomeAddress == null)
-                throw new OperationCanceledException("The home address cannot be void.");
-
-            if ( employee.NIT.ToString().Length > 9) 
-                throw new OperationCanceledException("The parameter NIT must have 9 numbers.");
-
             if (!CheckDepartment(employee.Department.Id))
                 throw new OperationCanceledException("The Department does not exist, id: " + employee.Department.Id);
         }

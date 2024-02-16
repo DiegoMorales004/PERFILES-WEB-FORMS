@@ -153,9 +153,7 @@ namespace PERFILES
                 string.IsNullOrEmpty(txtNames.Text) ||
                 string.IsNullOrEmpty(txtDPI.Text) ||
                 string.IsNullOrEmpty(txtBirthDate.Text) ||
-                string.IsNullOrEmpty(txtAdmission.Text) ||
-                string.IsNullOrEmpty(txtHomeAddress.Text) ||
-                string.IsNullOrEmpty(txtNIT.Text)
+                string.IsNullOrEmpty(txtAdmission.Text)
                 )
             {
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "script", "alert('Ningun campo puede estar vacio.')", true);
@@ -165,12 +163,6 @@ namespace PERFILES
             if(txtDPI.Text.Length != 13)
             {
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "script", "alert('El campo de DPI debe tener 13 numeros.')", true);
-                return false;
-            }
-
-            if(txtNIT.Text.Length != 9)
-            {
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "script", "alert('El campo de NIT debe tener 9 numeros.')", true);
                 return false;
             }
 
