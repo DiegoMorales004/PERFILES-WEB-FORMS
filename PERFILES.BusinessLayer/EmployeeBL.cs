@@ -1,5 +1,4 @@
-﻿using PERFILES.DataLayer;
-using PERFILES.EntityLayer;
+﻿
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,6 +7,9 @@ using System.Threading.Tasks;
 
 using System.Globalization;
 using Microsoft.SqlServer.Server;
+
+using PERFILES.DataLayer;
+using PERFILES.EntityLayer;
 
 
 namespace PERFILES.BusinessLayer
@@ -127,7 +129,7 @@ namespace PERFILES.BusinessLayer
             if (employee.HomeAddress == "" || employee.HomeAddress == null)
                 throw new OperationCanceledException("The home address cannot be void.");
 
-            if (employee.NIT.GetType() != typeof(System.Int32) || employee.NIT.ToString().Length > 9) 
+            if ( employee.NIT.ToString().Length > 9) 
                 throw new OperationCanceledException("The parameter NIT must have 9 numbers.");
 
             if (CheckDepartment(employee.Department.Id))

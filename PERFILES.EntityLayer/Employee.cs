@@ -16,7 +16,7 @@ namespace PERFILES.EntityLayer
         public string Admission { get; set; }
         public int Age {  get; set; }
         public string HomeAddress {  get; set; }
-        public int NIT {  get; set; }
+        public string NIT {  get; set; }
         public Department Department { get; set; }
     }
 }

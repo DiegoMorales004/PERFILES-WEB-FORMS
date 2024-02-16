@@ -107,7 +107,7 @@ namespace PERFILES
                 Gender = Convert.ToChar(ddlGenders.SelectedValue),
                 Admission = txtAdmission.Text,
                 HomeAddress = txtHomeAddress.Text,
-                NIT = Convert.ToInt32(txtNIT.Text),
+                NIT = txtNIT.Text,
                 Department = new Department()
                 {
                     Id = Convert.ToInt32(ddlDepartment.SelectedValue),

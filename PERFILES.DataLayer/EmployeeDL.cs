@@ -64,7 +64,7 @@ namespace PERFILES.DataLayer
                             employee.Admission = reader["admission"].ToString();
                             employee.Age = Convert.ToInt32(reader["age"].ToString());
                             employee.HomeAddress = reader["homeAddress"].ToString();
-                            employee.NIT = Convert.ToInt32(reader["NIT"].ToString());
+                            employee.NIT = reader["NIT"].ToString();
 
                             employee.Department = new Department()
                             {
@@ -105,7 +105,7 @@ namespace PERFILES.DataLayer
                         while (reader.Read())
                         {
                             list.Add(
-                                new Employee()
+                                new Employee
                                 {
                                     Id = Convert.ToInt32(reader["id"].ToString()),
                                     Names = reader["names"].ToString(),
@@ -115,7 +115,7 @@ namespace PERFILES.DataLayer
                                     Admission = reader["admission"].ToString(),
                                     Age = Convert.ToInt32(reader["age"].ToString()),
                                     HomeAddress = reader["homeAddress"].ToString(),
-                                    NIT = Convert.ToInt32(reader["NIT"].ToString()),
+                                    NIT = reader["NIT"].ToString(),
                                     Department = new Department()
                                     {
                                         Id = Convert.ToInt32(reader["id"].ToString()),
