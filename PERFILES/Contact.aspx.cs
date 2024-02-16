@@ -67,6 +67,7 @@ namespace PERFILES
             }
         }
 
+        //Load departments
         private void LoadDepartment(string idDepartment)
         {
             List<Department> departments = DepartmentBL.DepartmentList();
@@ -87,6 +88,7 @@ namespace PERFILES
 
         }
 
+        //Load genders
         private void LoadGender(string gender)
         {
 
@@ -102,8 +104,14 @@ namespace PERFILES
 
         }
 
+
+        //Save or Update
         protected void btnSubmit_Click(object sender, EventArgs e)
         {
+
+            bool validTextAreas = CheckParameters();
+
+            if (!validTextAreas) return;
 
             Employee employee = new Employee()
             {
@@ -136,5 +144,39 @@ namespace PERFILES
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "script", "alert('No se pudo realizar la operacion')", true);
 
         }
+
+
+        private bool CheckParameters()
+        {
+
+            if (
+                string.IsNullOrEmpty(txtNames.Text) ||
+                string.IsNullOrEmpty(txtDPI.Text) ||
+                string.IsNullOrEmpty(txtBirthDate.Text) ||
+                string.IsNullOrEmpty(txtAdmission.Text) ||
+                string.IsNullOrEmpty(txtHomeAddress.Text) ||
+                string.IsNullOrEmpty(txtNIT.Text)
+                )
+            {
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "script", "alert('Ningun campo puede estar vacio.')", true);
+                return false;
+            }
+
+            if(txtDPI.Text.Length != 13)
+            {
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "script", "alert('El campo de DPI debe tener 13 numeros.')", true);
+                return false;
+            }
+
+            if(txtNIT.Text.Length != 9)
+            {
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "script", "alert('El campo de NIT debe tener 9 numeros.')", true);
+                return false;
+            }
+
+            return true;
+
+        }
+
     }
 }
