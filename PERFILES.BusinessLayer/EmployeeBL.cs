@@ -25,7 +25,7 @@ namespace PERFILES.BusinessLayer
         {
             try
             {
-                //CheckParametersEmployee(employee);
+                CheckParametersEmployee(employee);
 
                 employee.Age = CalculateAge(employee.BirthDate);
 
