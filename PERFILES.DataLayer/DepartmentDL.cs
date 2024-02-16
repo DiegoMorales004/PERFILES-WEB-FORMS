@@ -78,6 +78,45 @@ namespace PERFILES.DataLayer
 
         }
 
+        //Get one by name
+        public Department GetDepartmentByName(string name)
+        {
+            Department Department = new Department();
+
+            using (SqlConnection localConnection = new SqlConnection(Connection.connection))
+            {
+                SqlCommand cmd = new SqlCommand("SP_ReadOneByName", localConnection);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@name", name);
+
+                try
+                {
+
+                    localConnection.Open();
+
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            Department.Id = Convert.ToInt32(reader["id"].ToString());
+                            Department.Name = reader["name"].ToString();
+                            Department.Description = reader["description"].ToString();
+
+                        }
+                    }
+
+                    return Department;
+
+                }
+                catch (Exception e)
+                {
+                    throw e;
+                }
+
+            }
+
+        }
+
         //Get all departments
         public List<Department> DepartmentsList()
         {
@@ -116,10 +155,11 @@ namespace PERFILES.DataLayer
         //Update department
         public bool UpdateDepartment(Department department)
         {
-            using(SqlConnection localConnection = new SqlConnection())
+            using (SqlConnection localConnection = new SqlConnection(Connection.connection))
             {
-                
+
                 SqlCommand cmd = new SqlCommand("SP_UpdateDepartment", localConnection);
+                cmd.CommandType = CommandType.StoredProcedure;
 
                 AddWithValue(ref cmd, department, true);
 
@@ -129,9 +169,10 @@ namespace PERFILES.DataLayer
                     bool Updated = CheckRowsAffected(localConnection, ref cmd);
                     return Updated;
 
-                }catch(Exception e)
+                }
+                catch (Exception ex)
                 {
-                    throw e;
+                    throw ex;
                 }
 
             }

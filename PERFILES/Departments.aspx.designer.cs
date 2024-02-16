@@ -11,7 +11,7 @@ namespace PERFILES
 {
 
 
-    public partial class Department
+    public partial class Departments
     {
 
         /// <summary>

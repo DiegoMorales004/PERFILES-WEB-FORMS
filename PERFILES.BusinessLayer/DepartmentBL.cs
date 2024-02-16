@@ -18,6 +18,11 @@ namespace PERFILES.BusinessLayer
         {
             try
             {
+                //Check valid name
+                Department valid = this.GetOneDepartmentByName(department.Name);
+                if (valid.Id != 0)
+                    throw new OperationCanceledException("The name is already in use.");
+
                 CheckParametersDepartment(department);
                 return DepartmentDL.CreateDepartment(department);
             }catch (Exception ex)
@@ -40,6 +45,20 @@ namespace PERFILES.BusinessLayer
 
                 return find;
 
+            }catch(Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        //Get one department by name
+        public Department GetOneDepartmentByName(string name)
+        {
+            try
+            {
+                if (string.IsNullOrEmpty(name))
+                    throw new OperationCanceledException("The name cannot be void");
+                return DepartmentDL.GetDepartmentByName(name);
             }catch(Exception ex)
             {
                 throw ex;
