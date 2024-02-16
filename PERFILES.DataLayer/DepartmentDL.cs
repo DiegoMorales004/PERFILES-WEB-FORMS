@@ -86,7 +86,7 @@ namespace PERFILES.DataLayer
 
             using (SqlConnection localConnection = new SqlConnection(Connection.connection))
             {
-                SqlCommand cmd = new SqlCommand("SP_ReadDepartment", localConnection);
+                SqlCommand cmd = new SqlCommand("SP_ReadDepartments", localConnection);
                 cmd.CommandType = CommandType.StoredProcedure;
                 try {
                     localConnection.Open();

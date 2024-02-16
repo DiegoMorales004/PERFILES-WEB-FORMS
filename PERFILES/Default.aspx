@@ -4,7 +4,7 @@
 
     <div>
         <div>
-            <asp:Button runat="server" OnClick="New_Employee_Click" CssClass="btn btn-sm -btn-success" Text="Nuevo" />
+            <asp:Button runat="server" OnClick="New_Employee_Click" CssClass="btn btn-sm btn-success" Text="Nuevo" />
         </div>
     </div>
 
@@ -28,16 +28,16 @@
                             
                             <asp:LinkButton 
                                 runat="server" 
-                                CommandArgument='<%# Eval("id") %>'
+                                CommandArgument='<%# Eval("Id") %>'
                                 OnClick="Edit_Employee_Click"
-                                CssClass="btn btn-sm btn-primary"
+                                CssClass="btn btn-sm btn-primary mb-2"
                                 >
                                 Editar
                             </asp:LinkButton>
 
                             <asp:LinkButton 
                                 runat="server" 
-                                CommandArgument='<%# Eval("id") %>'
+                                CommandArgument='<%# Eval("Id") %>'
                                 OnClick="Delete_Employee_Click"
                                 CssClass="btn btn-sm btn-danger"
                                 OnClientClick="return confirm('¿Desea eliminar el empleado?')"

@@ -11,7 +11,7 @@
 
     <div class="mb-3">
         <label class="form-label" >DPI</label>
-        <asp:TextBox ID="txtDPI" runat="server" CssClass="form-control" TextMode="Number" ></asp:TextBox>
+        <asp:TextBox ID="txtDPI" runat="server" CssClass="form-control" ></asp:TextBox>
     </div>
 
     <div class="mb-3">
@@ -41,7 +41,7 @@
 
     <div class="mb-3">
         <label class="form-label" >Departamento</label>
-        <asp:DropDownList ID="ddlDepartment" runat="server"></asp:DropDownList>
+        <asp:DropDownList ID="ddlDepartment" runat="server" CssClass="form-control"></asp:DropDownList>
     </div>
 
     <asp:Button ID="btnSubmit" runat="server" Text="Guardar" CssClass="btn btn-sm btn-primary" OnClick="btnSubmit_Click"/>

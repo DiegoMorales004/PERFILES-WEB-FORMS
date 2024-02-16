@@ -58,7 +58,7 @@ namespace PERFILES.DataLayer
                         {
                             employee.Id = Convert.ToInt32(reader["ID"].ToString());
                             employee.Names = reader["names"].ToString();
-                            employee.DPI = Convert.ToInt32(reader["DPI"].ToString());
+                            employee.DPI = reader["DPI"].ToString();
                             employee.BirthDate = reader["birthDate"].ToString();
                             employee.Gender = Convert.ToChar(reader["gender"].ToString());
                             employee.Admission = reader["admission"].ToString();
@@ -109,7 +109,7 @@ namespace PERFILES.DataLayer
                                 {
                                     Id = Convert.ToInt32(reader["id"].ToString()),
                                     Names = reader["names"].ToString(),
-                                    DPI = Convert.ToInt32(reader["DPI"].ToString()),
+                                    DPI = reader["DPI"].ToString(),
                                     BirthDate = reader["birthDate"].ToString(),
                                     Gender = Convert.ToChar(reader["gender"].ToString()),
                                     Admission = reader["admission"].ToString(),
@@ -119,8 +119,8 @@ namespace PERFILES.DataLayer
                                     Department = new Department()
                                     {
                                         Id = Convert.ToInt32(reader["id"].ToString()),
-                                        Name = reader["name"].ToString(),
-                                        Description = reader["description"].ToString()
+                                        Name = reader["departmentName"].ToString(),
+                                        Description = reader["departmentDescription"].ToString()
                                     }
                                 });
                         }

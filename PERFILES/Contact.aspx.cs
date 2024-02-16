@@ -22,8 +22,10 @@ namespace PERFILES
         {
             if (!Page.IsPostBack)
             {
-                if (Request.QueryString["id"] != null)
+                if (Request.QueryString["id"] != null && Request.QueryString["id"] != "0")
                 {
+
+                    id = Convert.ToInt32(Request.QueryString["id"]);
 
                     lblTitle.Text = "Editar empleado";
                     btnSubmit.Text = "Editar";
@@ -33,9 +35,9 @@ namespace PERFILES
 
                     //Fill text area with old data
                     txtNames.Text = employee.Names;
-                    txtDPI.Text = employee.DPI.ToString();
+                    txtDPI.Text = employee.DPI;
                     txtBirthDate.Text = Convert.ToDateTime(employee.BirthDate, new CultureInfo("es-GT")).ToString("yyyy-MM-dd");
-                    txtAdmission.Text = Convert.ToDateTime(employee.HomeAddress, new CultureInfo("es-GT")).ToString("yyyy-MM-dd");
+                    txtAdmission.Text = Convert.ToDateTime(employee.Admission, new CultureInfo("es-GT")).ToString("yyyy-MM-dd");
                     txtHomeAddress.Text = employee.HomeAddress;
                     txtNIT.Text = employee.NIT.ToString();
 
@@ -50,6 +52,7 @@ namespace PERFILES
 
                     //Fill DropDownList
                     LoadDepartment("");
+                    LoadGender("");
 
                 }
             }
@@ -102,7 +105,7 @@ namespace PERFILES
             {
                 Id = id,
                 Names = txtNames.Text,
-                DPI = Convert.ToInt32(txtDPI.Text),
+                DPI = txtDPI.Text,
                 BirthDate = txtBirthDate.Text,
                 Gender = Convert.ToChar(ddlGenders.SelectedValue),
                 Admission = txtAdmission.Text,

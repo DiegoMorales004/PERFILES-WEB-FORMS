@@ -10,7 +10,7 @@ namespace PERFILES.EntityLayer
     {
         public int Id { get; set; }
         public string Names{ get; set; }
-        public int DPI { get; set; }
+        public string DPI { get; set; }
         public string BirthDate {  get; set; }
         public char Gender {  get; set; }
         public string Admission { get; set; }

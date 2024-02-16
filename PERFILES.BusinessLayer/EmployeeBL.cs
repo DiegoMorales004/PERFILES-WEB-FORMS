@@ -46,6 +46,7 @@ namespace PERFILES.BusinessLayer
                 Employee employee = EmployeeDL.GetEmployee(id);
                 if(employee == null || employee.Id == 0)
                 {
+                    Console.WriteLine(employee.Id);
                     throw new OperationCanceledException("The employee does not exist.");
                 }
 
@@ -114,7 +115,7 @@ namespace PERFILES.BusinessLayer
             if (employee.Names == "" || employee.Names == null) 
                 throw new OperationCanceledException("The names cannot be void.");
 
-            if (employee.DPI.GetType() != typeof( System.Int32 ) || employee.DPI.ToString().Length != 13) 
+            if (employee.DPI.Length != 13) 
                 throw new OperationCanceledException("The parameter DPI must have 13 numbers.");
 
             if ( CheckFormateDate( employee.BirthDate, out date ) ) 
