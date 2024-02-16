@@ -119,17 +119,19 @@ namespace PERFILES
 
             bool response;
 
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "script", $"alert({employee})", true);
+
             //Save or Update employee
-            if (employee.Id == 0)
-                response = EmployeeBL.CreateEmployee(employee);
-            else
+            if (id != 0)
                 response = EmployeeBL.UpdateEmployee(employee);
+            else
+                response = EmployeeBL.CreateEmployee(employee);
 
             //Verify operation
             if (response)
                 Response.Redirect("~/Default.aspx");
             else
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "script", "alert('No se ha completado la operacion')", true);
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "script", "alert('No se pudo realizar la operacion')", true);
 
         }
     }
