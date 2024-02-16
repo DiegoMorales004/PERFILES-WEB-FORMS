@@ -22,44 +22,48 @@ namespace PERFILES
         {
             if (!Page.IsPostBack)
             {
-                if (Request.QueryString["id"] != null && Request.QueryString["id"] != "0")
+                if (Request.QueryString["id"] != null)
                 {
 
                     id = Convert.ToInt32(Request.QueryString["id"]);
 
-                    lblTitle.Text = "Editar empleado";
-                    btnSubmit.Text = "Editar";
+                    if(id != 0)
+                    {
 
-                    //Search employee
-                    Employee employee = EmployeeBL.GetEmployee(id);
+                        lblTitle.Text = "Editar empleado";
+                        btnSubmit.Text = "Editar";
 
-                    //Fill text area with old data
-                    txtNames.Text = employee.Names;
-                    txtDPI.Text = employee.DPI;
-                    txtBirthDate.Text = Convert.ToDateTime(employee.BirthDate, new CultureInfo("es-GT")).ToString("yyyy-MM-dd");
-                    txtAdmission.Text = Convert.ToDateTime(employee.Admission, new CultureInfo("es-GT")).ToString("yyyy-MM-dd");
-                    txtHomeAddress.Text = employee.HomeAddress;
-                    txtNIT.Text = employee.NIT.ToString();
+                        //Search employee
+                        Employee employee = EmployeeBL.GetEmployee(id);
 
-                    //Fill the DropDownLists
-                    LoadGender(employee.Gender.ToString());
-                    LoadDepartment(employee.Department.Id.ToString());
+                        //Fill text area with old data
+                        txtNames.Text = employee.Names;
+                        txtDPI.Text = employee.DPI;
+                        txtBirthDate.Text = Convert.ToDateTime(employee.BirthDate, new CultureInfo("es-GT")).ToString("yyyy-MM-dd");
+                        txtAdmission.Text = Convert.ToDateTime(employee.Admission, new CultureInfo("es-GT")).ToString("yyyy-MM-dd");
+                        txtHomeAddress.Text = employee.HomeAddress;
+                        txtNIT.Text = employee.NIT.ToString();
 
-                } else
-                {
-                    lblTitle.Text = "Registrar empleado";
-                    btnSubmit.Text = "Guardar";
+                        //Fill the DropDownLists
+                        LoadGender(employee.Gender.ToString());
+                        LoadDepartment(employee.Department.Id.ToString());
 
-                    //Fill DropDownList
-                    LoadDepartment("");
-                    LoadGender("");
+                    }else
+                    {
+                        lblTitle.Text = "Registrar empleado";
+                        btnSubmit.Text = "Guardar";
 
+                        //Fill DropDownList
+                        LoadDepartment("");
+                        LoadGender("");
+
+                    }
                 }
-            }
-            else
-            {
-                //Redirect if the parameter not exist
-                Response.Redirect("~/Default.aspx");
+                else
+                {
+                    //Redirect if the parameter not exist
+                    Response.Redirect("~/Default.aspx");
+                }
             }
         }
 
@@ -118,8 +122,6 @@ namespace PERFILES
         };
 
             bool response;
-
-            ScriptManager.RegisterStartupScript(this, this.GetType(), "script", $"alert({employee})", true);
 
             //Save or Update employee
             if (id != 0)

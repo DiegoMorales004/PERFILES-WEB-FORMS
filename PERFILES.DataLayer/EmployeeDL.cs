@@ -17,13 +17,11 @@ namespace PERFILES.DataLayer
         public bool CreateEmployee(Employee employee)
         {
 
-
             using (SqlConnection localConnection = new SqlConnection(Connection.connection))
             {
                 SqlCommand cmd = new SqlCommand("SP_CreateEmployee", localConnection);
 
                 AddWithValue(ref cmd, employee, false);
-
 
                 try
                 {

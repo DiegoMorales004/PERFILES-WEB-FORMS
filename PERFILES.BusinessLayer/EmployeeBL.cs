@@ -25,7 +25,7 @@ namespace PERFILES.BusinessLayer
         {
             try
             {
-                CheckParametersEmployee(employee);
+                //CheckParametersEmployee(employee);
 
                 employee.Age = CalculateAge(employee.BirthDate);
 
@@ -107,7 +107,6 @@ namespace PERFILES.BusinessLayer
         //Check parameters for employee
         private void CheckParametersEmployee(Employee employee)
         {
-            DateTime date;
 
             if (employee == null) 
                 throw new OperationCanceledException("The employee cannot be null.");
@@ -118,14 +117,14 @@ namespace PERFILES.BusinessLayer
             if (employee.DPI.Length != 13) 
                 throw new OperationCanceledException("The parameter DPI must have 13 numbers.");
 
-            if ( CheckFormateDate( employee.BirthDate, out date ) ) 
-                throw new OperationCanceledException("Invalid format to birthdate");
+            if (employee.BirthDate == null)
+                throw new OperationCanceledException("Invalid birthDate");
 
-            if (employee.Gender != 'M' || employee.Gender != 'F') 
+            if (employee.Gender.ToString().Length > 1) 
                 throw new OperationCanceledException("Invalid gender");
 
-            if( CheckFormateDate( employee.Admission, out date ) ) 
-                throw new OperationCanceledException("Invalid format to birthdate");
+            if( employee.Admission == null ) 
+                throw new OperationCanceledException("Invalid admission");
 
             if (employee.HomeAddress == "" || employee.HomeAddress == null)
                 throw new OperationCanceledException("The home address cannot be void.");
@@ -133,15 +132,8 @@ namespace PERFILES.BusinessLayer
             if ( employee.NIT.ToString().Length > 9) 
                 throw new OperationCanceledException("The parameter NIT must have 9 numbers.");
 
-            if (CheckDepartment(employee.Department.Id))
-                throw new OperationCanceledException("The Department does not exist");
-        }
-
-        //Check format yyyy-MM-dd
-        public bool CheckFormateDate(string date, out DateTime outDate)
-        {
-            bool valid = DateTime.TryParseExact(date, "yyyy-MM-dd", null, System.Globalization.DateTimeStyles.None, out outDate);
-            return valid;
+            if (!CheckDepartment(employee.Department.Id))
+                throw new OperationCanceledException("The Department does not exist, id: " + employee.Department.Id);
         }
 
         //Verify that the department exists

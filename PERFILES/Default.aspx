@@ -4,7 +4,7 @@
 
     <div>
         <div>
-            <asp:Button runat="server" OnClick="New_Employee_Click" CssClass="btn btn-sm btn-success" Text="Nuevo" />
+            <asp:Button runat="server" OnClick="New_Employee_Click" CssClass="btn btn-sm btn-success mb-4" Text="Agregar Empleado" />
         </div>
     </div>
 
@@ -26,24 +26,26 @@
                     <asp:TemplateField>
                         <ItemTemplate>
                             
-                            <asp:LinkButton 
-                                runat="server" 
-                                CommandArgument='<%# Eval("Id") %>'
-                                OnClick="Edit_Employee_Click"
-                                CssClass="btn btn-sm btn-primary mb-2"
-                                >
-                                Editar
-                            </asp:LinkButton>
+                            <div class="d-flex">
+                                <asp:LinkButton 
+                                    runat="server" 
+                                    CommandArgument='<%# Eval("Id") %>'
+                                    OnClick="Edit_Employee_Click"
+                                    CssClass="btn btn-sm btn-primary"
+                                    >
+                                    Editar
+                                </asp:LinkButton>
 
-                            <asp:LinkButton 
-                                runat="server" 
-                                CommandArgument='<%# Eval("Id") %>'
-                                OnClick="Delete_Employee_Click"
-                                CssClass="btn btn-sm btn-danger"
-                                OnClientClick="return confirm('¿Desea eliminar el empleado?')"
-                                >
-                                Eliminar
-                            </asp:LinkButton>
+                                <asp:LinkButton 
+                                    runat="server" 
+                                    CommandArgument='<%# Eval("Id") %>'
+                                    OnClick="Delete_Employee_Click"
+                                    CssClass="btn btn-sm btn-danger ms-2"
+                                    OnClientClick="return confirm('¿Desea eliminar el empleado?')"
+                                    >
+                                    Eliminar
+                                </asp:LinkButton>
+                            </div>
 
                         </ItemTemplate>
                     </asp:TemplateField>
