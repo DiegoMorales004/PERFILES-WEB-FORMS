@@ -135,6 +135,58 @@ namespace PERFILES.DataLayer
 
         }
 
+        public List<Employee> EmployeesListByDepartment(int idDepartment)
+        {
+
+            List<Employee> list = new List<Employee>();
+
+            using (SqlConnection localConnection = new SqlConnection(Connection.connection))
+            {
+                SqlCommand cmd = new SqlCommand("SP_ReadEmployeesByDepartment", localConnection);
+
+                cmd.Parameters.AddWithValue("@idDepartment", idDepartment);
+
+                cmd.CommandType = CommandType.StoredProcedure;
+                try
+                {
+                    localConnection.Open();
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            list.Add(
+                                new Employee
+                                {
+                                    Id = Convert.ToInt32(reader["id"].ToString()),
+                                    Names = reader["names"].ToString(),
+                                    DPI = reader["DPI"].ToString(),
+                                    BirthDate = reader["birthDate"].ToString(),
+                                    Gender = Convert.ToChar(reader["gender"].ToString()),
+                                    Admission = reader["admission"].ToString(),
+                                    Age = Convert.ToInt32(reader["age"].ToString()),
+                                    HomeAddress = reader["homeAddress"].ToString(),
+                                    NIT = reader["NIT"].ToString(),
+                                    Department = new Department()
+                                    {
+                                        Id = Convert.ToInt32(reader["id"].ToString()),
+                                        Name = reader["departmentName"].ToString(),
+                                        Description = reader["departmentDescription"].ToString()
+                                    }
+                                });
+                        }
+                    }
+
+                    return list;
+
+                }
+                catch (Exception e)
+                {
+                    throw e;
+                }
+            }
+
+        }
+
         //Update employee
         public bool UpdateEmployee(Employee employee)
         {

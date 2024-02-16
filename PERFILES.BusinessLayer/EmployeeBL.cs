@@ -70,6 +70,18 @@ namespace PERFILES.BusinessLayer
             }
         }
 
+        //Get list of employees by department
+        public List<Employee> GetEmployeesByDepartment(int IdDepartment)
+        {
+            try
+            {
+                return EmployeeDL.EmployeesListByDepartment(IdDepartment);
+            }catch(Exception ex)
+            {
+                throw ex;
+            }
+        }
+
         //Update employee
         public bool UpdateEmployee(Employee employee)
         {
