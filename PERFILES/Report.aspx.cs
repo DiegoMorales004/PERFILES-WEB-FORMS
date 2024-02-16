@@ -7,6 +7,7 @@ using System.Web.UI.WebControls;
 
 using PERFILES.EntityLayer;
 using PERFILES.BusinessLayer;
+using System.Globalization;
 
 namespace PERFILES
 {
@@ -64,6 +65,15 @@ namespace PERFILES
             {
                 employees = FilterByDepartment( Convert.ToInt32(ddlDepartment.SelectedValue));
             }
+            if(!string.IsNullOrEmpty(txtInitialDate.Text) && !string.IsNullOrEmpty(txtEndDate.Text)) {
+
+                bool validDates = CheckDates();
+                if (validDates)
+                {
+                    employees = FilterByDates(Convert.ToDateTime(txtInitialDate.Text), Convert.ToDateTime(txtEndDate.Text), employees);
+                }
+
+            }
                 GVEmployees.DataSource = employees;
                 GVEmployees.DataBind();
 
@@ -76,6 +86,41 @@ namespace PERFILES
             List<Employee> employeesByDepartment = _EmployeeBL.GetEmployeesByDepartment(departmentId);
 
             return employeesByDepartment;
+        }
+
+        //Filter by Dates
+        private List<Employee> FilterByDates(DateTime dateInitial, DateTime dateEnd, List<Employee> list)
+        {
+
+            List<Employee> filteredList = list.Where(
+                    emp =>
+                    {
+                        DateTime admissionDate = Convert.ToDateTime(emp.Admission);
+
+                        return admissionDate >= dateInitial && admissionDate <= dateEnd;
+
+                    }
+                ).ToList();
+
+            return filteredList;
+
+        }
+
+        //Check date to filter
+        private bool CheckDates()
+        {
+            bool valid = true;
+
+            DateTime initial = Convert.ToDateTime(txtInitialDate.Text);
+            DateTime end = Convert.ToDateTime(txtEndDate.Text);
+
+            if (end < initial || end == initial)
+            {
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "script", "alert('La ultima fecha no puede ser antes o igual que la fecha inicial.')", true);
+                return false;
+            }
+
+            return valid;
         }
 
     }
